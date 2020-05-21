@@ -3,21 +3,20 @@
  */
 package circular.generics
 
-import generics.ExtendedSimplest
-import generics.AllAtOnce
+import generics.GenericConsumer
 
 class Library {
 
-    AllAtOnce findOrCreateTheProblematicClass(ExtendedSimplest extendedSimplest, String anId, String aCategory) {
+    GenericConsumer findOrCreateTheProblematicClass(String aCategory) {
         // The compiler crashes with StackoverflowError when entering the closure, because it can't resolve the generic parameter in AllAtOnce
-        AllAtOnce problemClass = retryIfDuplicateKey { ->
-            AllAtOnce.findSpecificType(aCategory).testMethod(extendedSimplest, anId)
-        } as AllAtOnce
+        GenericConsumer problemClass = anotherTestMethod { ->
+            (GenericConsumer.findSpecificType(aCategory) as GenericConsumer).testMethod()
+        } as GenericConsumer
 
         return problemClass
     }
 
-    static <T> T retryIfDuplicateKey(Closure<T> statement) {
+    static <T> T anotherTestMethod(Closure<T> statement) {
         def result
         try {
             result = statement()

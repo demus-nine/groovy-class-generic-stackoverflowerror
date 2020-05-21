@@ -3,7 +3,6 @@
  */
 
 import circular.generics.Library
-import generics.implTwo.ExtendedSimplestImplTwo
 import spock.lang.Specification
 
 class LibraryTest extends Specification {
@@ -13,7 +12,7 @@ class LibraryTest extends Specification {
         def lib = new Library()
 
         when:
-        def result = lib.findOrCreateTheProblematicClass(new ExtendedSimplestImplTwo(), '1234', 'cat1')
+        def result = lib.findOrCreateTheProblematicClass('cat1')
 
         then:
         result
